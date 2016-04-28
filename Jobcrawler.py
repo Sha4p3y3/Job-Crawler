@@ -86,7 +86,7 @@ def parser(soup):
             job = str(jobs.get_text())
         if version_info.major == 2:
             job = jobs.get_text().encode("utf-8")
-        print(job)
+        
         jobslist.append(job)
 
     for companies in CompanyName:
@@ -94,7 +94,7 @@ def parser(soup):
             company = str(companies.get_text())
         if version_info.major == 2:
             company = companies.get_text().encode("utf-8")
-        print(company)
+        
         companieslist.append(company)
 
     for links in JobLink:
@@ -102,24 +102,25 @@ def parser(soup):
             link = str(links.get('href'))
         if version_info.major == 2:
             link = links.get('href').encode("utf-8")
-        print(link)
+        
         linkslist.append(link)
 
     with open(filename, 'w') as file:
         for i in range(len(jobslist)):
             # Uncomment below to see job postings on console
-            # print('Job Title:'+jobslist[i])
-            # print('Company Name: '+companieslist[i])
-            # print("Links:
-            # "+r"http://www.technopark.org/job-search"+linkslist[i]+"\n")
+            #print('Job Title:'+jobslist[i])
+            #print('Company Name: '+companieslist[i])
+            #print("Links:"+r"http://www.technopark.org/job-search"+linkslist[i]+"\n")
 
             file.write("Job Title: " + jobslist[i] + "\n")
             file.write("Company Name: " + companieslist[i] + "\n")
             file.write(r"http://www.technopark.org/" + linkslist[i] + "\n")
             file.write("\n")
-        print("Done. Please check " + filename)
-        print("Thank you")
 
+    print("Done. Please check " + filename)
+    print("Thank you")
+
+            
 # Checks for any errors due to site issues such as web page not found or
 # server issues, etc
 try:

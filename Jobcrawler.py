@@ -1,22 +1,22 @@
 # -*- coding: utf8 -*-
 
 """****************Technopark Job Search Crawler************
-The requirements for the program to work is that you have python(3.5.1)
-installed. You will have to import BeautifulSoup and re modules. You can type
-"pip install bs4" respectively in the command prompt and
+I assume that you have python(2/3) installed.
+You will have to import BeautifulSoup4 and re modules.
+You can type "pip install bs4" respectively in the command prompt and
 python would automatically download/install them.
 
-The jobs are posted in a doc format on the desktop.
+The jobs are posted in a doc format in the current working dir.
 
 The crawler parses Job Title, Company Name and the job link.
 Any questions, you can email me at sharpeyekool@gmail.com
 -------------------------------------------------------------------------------
 Created by Roni Rengit"""
 
-from bs4 import BeautifulSoup
 import re
+from bs4 import BeautifulSoup
 from os import path, getcwd
-from sys import platform, version_info, exit
+from sys import platform, version_info
 
 # compatible import urlopen in both python3 and python2
 try:
@@ -24,20 +24,19 @@ try:
 except ImportError:
     try:
         from urllib import urlopen
-    except Exception, e:
+    except Exception as e:
         raise e
 
 # Console
 print("Webcrawler for www.technopark.org job site")
 
-"""# Check for OS support
-if(sys.platform == 'win32'):
+# Check for OS support
+if(platform == 'win32'):
     print("Windows platform 32 bit\n")
-elif(sys.platform == 'win64'):
+elif(platform == 'win64'):
     print("Windows platform 64 bit\n")
 else:
     print("Sorry, I have not checked the program for non-Windows systems\n")
-"""
 
 
 # compatible input function
@@ -65,7 +64,7 @@ try:
         pass
 
 except Exception as e:
-    print e
+    print(e)
     print("Please close the document and try again")
     minput("")
 
@@ -83,13 +82,28 @@ def parser(soup):
     linkslist = []
 
     for jobs in JobTitle:
-        jobslist.append(jobs.get_text().encode("utf-8"))
+        if version_info.major == 3:
+            job = str(jobs.get_text())
+        if version_info.major == 2:
+            job = jobs.get_text().encode("utf-8")
+        print(job)
+        jobslist.append(job)
 
     for companies in CompanyName:
-        companieslist.append(str(companies.get_text()))
+        if version_info.major == 3:
+            company = str(companies.get_text())
+        if version_info.major == 2:
+            company = companies.get_text().encode("utf-8")
+        print(company)
+        companieslist.append(company)
 
     for links in JobLink:
-        linkslist.append(str(links.get('href')))
+        if version_info.major == 3:
+            link = str(links.get('href'))
+        if version_info.major == 2:
+            link = links.get('href').encode("utf-8")
+        print(link)
+        linkslist.append(link)
 
     with open(filename, 'w') as file:
         for i in range(len(jobslist)):
@@ -122,6 +136,6 @@ try:
     else:
         print("Try again")
 except Exception as e:
-    print e
+    print(e)
 
 minput("")

@@ -22,3 +22,5 @@ I am also including the python source code for those interested.
 
 
 Thanks. Happy Coding. 
+
+Thanks to @broono for making the program Python 2 compatible.

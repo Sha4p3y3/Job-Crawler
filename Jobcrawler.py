@@ -15,9 +15,11 @@ Created by Roni Rengit"""
 
 import re
 from bs4 import BeautifulSoup
+import ssl
 from os import path, getcwd
 from sys import platform, version_info
 
+ssl._create_default_https_context = ssl._create_unverified_context # Monkey Patching
 # compatible import urlopen in both python3 and python2
 try:
     from urllib.request import urlopen

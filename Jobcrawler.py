@@ -9,7 +9,6 @@ python would automatically download/install them.
 The jobs are posted in a doc format in the current working dir.
 
 The crawler parses Job Title, Company Name and the job link.
-Any questions, you can email me at sharpeyekool@gmail.com
 -------------------------------------------------------------------------------
 Created by Roni Rengit"""
 
